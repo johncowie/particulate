@@ -50,7 +50,7 @@ Add the marketplace and install the plugin:
 
 ```
 /plugin marketplace add johncowie/particulate
-/plugin install particulate@johncowie/particulate
+/plugin install particulate@johncowie
 ```
 
 Verify it's installed:
