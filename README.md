@@ -46,6 +46,15 @@ mise install
 
 ## Installation
 
+Add the marketplace and install the plugin:
+
 ```
 /plugin marketplace add johncowie/particulate
+/plugin install particulate@johncowie/particulate
+```
+
+Verify it's installed:
+
+```
+/plugin list
 ```
