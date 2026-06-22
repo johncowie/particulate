@@ -16,10 +16,18 @@ Add a new concept note about "$note_topic" to the Obsidian learning vault.
 
 Search for a `README.md` containing `type: index` in its frontmatter — that is the vault root. Check the current directory first, then one level of subdirectories. If not found, ask the user to specify the vault root path.
 
-### 2. Identify the track and module
+### 2. Identify the track, module, and note
 
-If "$track_module" was provided (e.g. `aws/networking` or just `aws`), parse it as `<track>/<module>` or `<track>`. Otherwise, make a reasonable suggestion based on "$note_topic" and ask the user to confirm before proceeding.
+If "$track_module" was provided (e.g. `aws/networking` or just `aws`), parse it as `<track>/<module>` or `<track>`. If "$note_topic" was also provided and unambiguous, proceed directly.
 
+**When the target note is unclear** (no args, or only a track with no module/note specified), find the next thing to work on using the course checkboxes:
+
+1. Read the course README and find the first module whose checkbox is unchecked (`- [ ]`).
+2. Read that module's README and find the first note whose checkbox is unchecked (`- [ ]`).
+3. Ask the user: "The next note to write is **<Note Title>** in **<Module Title>**. Want to work on that?"
+4. If the user says yes, proceed with that note. If no, ask them what they'd like to work on instead.
+
+Other rules:
 - The track is a top-level folder under the vault root (e.g. `catalan`, `aws`, `machine-learning`).
 - The module is a numbered subfolder within the track (e.g. `01-core-concepts`, `02-networking`).
 - If the track doesn't exist yet, tell the user to run `/create-course` first.
@@ -122,6 +130,12 @@ tags: [<track>, <module-name-without-number>]
 ```
 
 Also update the track README to include the new module if it was just created.
+
+**Module completion check:** After updating the module README, re-read it and check whether every note entry is now checked (`- [x]`). If all notes are checked, open the course README and tick the checkbox for this module:
+
+```
+- [x] [[NN-<module-name>/README|<Module Title>]]
+```
 
 ### 7. Teach the material
 

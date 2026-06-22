@@ -61,8 +61,8 @@ tags: [$course_name]
 
 ## Modules
 
-- [[01-<module-name>/README|<Module Title>]]
-- [[02-<module-name>/README|<Module Title>]]
+- [ ] [[01-<module-name>/README|<Module Title>]]
+- [ ] [[02-<module-name>/README|<Module Title>]]
 ...
 ```
 
