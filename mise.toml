@@ -15,12 +15,12 @@ run = "bash tests/unit/test-skill-frontmatter.sh"
 description = "Lint and format-check all shell scripts"
 run = [
   "shellcheck scripts/*.sh tests/unit/*.sh",
-  "shfmt -d scripts/*.sh tests/unit/*.sh",
+  "shfmt -i 2 -d scripts/*.sh tests/unit/*.sh",
 ]
 
 [tasks."scripts:format"]
 description = "Auto-format all shell scripts"
-run = "shfmt -w scripts/*.sh tests/unit/*.sh"
+run = "shfmt -i 2 -w scripts/*.sh tests/unit/*.sh"
 
 [tasks.version]
 description = "Bump version (args: patch | minor | major | get)"
