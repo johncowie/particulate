@@ -14,8 +14,7 @@ These skills are designed for an Obsidian vault with this layout:
 
 ```
 <vault-root>/
-├── _index/
-│   └── Home.md          ← master index (used to locate the vault)
+├── README.md            ← master index (type: index in frontmatter)
 └── <course-name>/
     ├── README.md         ← course overview
     └── <module-name>/
@@ -23,7 +22,7 @@ These skills are designed for an Obsidian vault with this layout:
         └── <note>.md     ← concept notes
 ```
 
-The vault root is discovered automatically by searching for a directory containing `_index/Home.md`. It does not need to be named anything specific.
+The vault root is discovered automatically by searching for a directory whose `README.md` has `type: index` in its frontmatter. It does not need to be named anything specific.
 
 ## Development
 

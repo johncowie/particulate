@@ -12,7 +12,7 @@ Create a new learning course for "$course_name" in the Obsidian vault.
 
 ## Steps
 
-1. **Locate the vault root** — The vault is an Obsidian vault directory somewhere in or near the current working directory. Look for a directory containing `_index/Home.md` — that directory is the vault root. Search the current directory first, then one level of subdirectories. If not found, ask the user to specify the vault root path.
+1. **Locate the vault root** — The vault is an Obsidian vault directory somewhere in or near the current working directory. Look for a directory containing a `README.md` with `type: index` in its frontmatter — that directory is the vault root. Search the current directory first, then one level of subdirectories. If not found, ask the user to specify the vault root path.
 
 2. **Validate the course name** — The course name "$course_name" should be lowercase and hyphen-separated (e.g. `machine-learning`, `aws`, `physics`). If it isn't, convert it automatically and confirm the conversion with the user.
 
