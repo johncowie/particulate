@@ -86,12 +86,12 @@ tags: [$course_name, <module-name>]
 
 ## Notes
 
-- [[NN <Note Title>|<Note Title>]]
-- [[NN <Note Title>|<Note Title>]]
+- [ ] [[NN <Note Title>|<Note Title>]]
+- [ ] [[NN <Note Title>|<Note Title>]]
 ...
 ```
 
-Note filenames in the index: zero-padded two-digit number + Title Case with spaces (e.g. `01 Gradient Descent`). Wikilinks must include the number but use an alias to hide it: `[[01 Gradient Descent|Gradient Descent]]`.
+Note filenames in the index: zero-padded two-digit number + Title Case with spaces (e.g. `01 Gradient Descent`). Wikilinks must include the number but use an alias to hide it: `[[01 Gradient Descent|Gradient Descent]]`. Each note entry gets an unchecked checkbox (`- [ ]`) so progress is visible at a glance — `/add-note` checks the box once the note is written.
 
 Do **not** create the individual note `.md` files — those are created later by `/add-note`.
 
