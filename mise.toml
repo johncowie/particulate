@@ -1,0 +1,27 @@
+[tools]
+python = "3.13"
+shellcheck = "0.11.0"
+shfmt = "3.13.1"
+
+[tasks.test]
+description = "Run all test suites"
+run = "bash scripts/test.sh"
+
+[tasks."test:unit"]
+description = "Run unit tests"
+run = "bash tests/unit/test-skill-frontmatter.sh"
+
+[tasks."scripts:check"]
+description = "Lint and format-check all shell scripts"
+run = [
+  "shellcheck scripts/*.sh tests/unit/*.sh",
+  "shfmt -d scripts/*.sh tests/unit/*.sh",
+]
+
+[tasks."scripts:format"]
+description = "Auto-format all shell scripts"
+run = "shfmt -w scripts/*.sh tests/unit/*.sh"
+
+[tasks.version]
+description = "Bump version (args: patch | minor | major | get)"
+run = "python3 scripts/bump-version.py"
