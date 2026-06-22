@@ -7,6 +7,7 @@ A Claude Code plugin providing skills for managing a structured Obsidian learnin
 | Skill | Description |
 |---|---|
 | `/create-course` | Create a new learning course (top-level subject area) |
+| `/add-note` | Add a concept note to a module, teach it, and quiz the user |
 
 ## Vault Structure
 
@@ -46,6 +47,15 @@ mise install
 
 ## Installation
 
+Add the marketplace and install the plugin:
+
 ```
 /plugin marketplace add johncowie/particulate
+/plugin install particulate@johncowie
+```
+
+Verify it's installed:
+
+```
+/plugin list
 ```
