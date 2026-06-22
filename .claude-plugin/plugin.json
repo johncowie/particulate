@@ -2,7 +2,7 @@
   "name": "particulate",
   "displayName": "Particulate Learning Tools",
   "description": "Skills for managing a structured Obsidian learning vault \u2014 creating tracks, modules, notes, and running quizzes.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": {
     "name": "John Cowie",
     "email": "john.a.cowie@gmail.com",
