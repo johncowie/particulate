@@ -155,7 +155,7 @@ After the conversation ends, if anything was discussed that would make the note 
 
 ### 10. Quiz the user
 
-Offer a quiz on the note, then run it using the `/quiz-note` skill with the note title as the argument. If the user declines, skip to the next step.
+Offer a quiz on the note, then run it using the `/quiz` skill with `note` and the note title as arguments. If the user declines, skip to the next step.
 
 ### 11. Commit prompt
 
