@@ -155,11 +155,7 @@ After the conversation ends, if anything was discussed that would make the note 
 
 ### 10. Quiz the user
 
-Offer a 5-question quiz drawn from the note's "Check Your Understanding" section:
-
-> "Ready for a quick quiz on <Title>? I'll ask one question at a time."
-
-Ask one question at a time. Wait for the user's answer before asking the next. Give feedback on each answer — whether it's correct, and why. Complete all 5 questions (or stop if the user skips).
+Offer a quiz on the note, then run it using the `/quiz-note` skill with the note title as the argument. If the user declines, skip to the next step.
 
 ### 11. Commit prompt
 
