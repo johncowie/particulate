@@ -73,7 +73,7 @@ Locate the matching top-level track directory (partial, case-insensitive). If no
 
 Read the track `README.md` to get the list of modules. For each module, read its `README.md` to get notes. Read each note file and extract the title, module, and all **Check Your Understanding** questions, tagged with note and module.
 
-For module and course quizzes: if the total question pool has fewer than 5 questions, use all available and note the smaller count in the quiz announcement.
+For module and course quizzes: if the total question pool is smaller than `<question-count>`, use all available and note the smaller count in the quiz announcement.
 
 ### 5. Load previous quiz results
 
@@ -93,7 +93,21 @@ Use this history to:
 
 Briefly note to the user if you're adapting based on past results (e.g. "You've struggled with **X** before, so I'll lean into that.").
 
-### 6. Choose quiz format
+### 6. Choose number of questions
+
+Use `AskUserQuestion` to ask how many questions the user wants:
+
+> "How many questions would you like?"
+> Options:
+> - **5** — a quick focused session
+> - **10** — a longer session
+> - **Custom** — I'll enter a different number
+
+If the user selects **Custom**, ask them to type in how many they'd like.
+
+Record the chosen count as `<question-count>`. If the available question pool is smaller than the chosen count, use the full pool and note the smaller count.
+
+### 7. Choose quiz format
 
 Use `AskUserQuestion` to ask the user how they'd like to be quizzed:
 
@@ -104,14 +118,14 @@ Use `AskUserQuestion` to ask the user how they'd like to be quizzed:
 
 Record the chosen format; it governs how questions are presented in the next step.
 
-### 7. Run the quiz
+### 8. Run the quiz
 
-Select 5 questions (or fewer if the pool is smaller). For module and course quizzes, spread across notes/modules where possible.
+Select `<question-count>` questions (or fewer if the pool is smaller). For module and course quizzes, spread across notes/modules where possible.
 
 Announce the quiz:
-- Note: `"Ready to quiz you on **<Title>**! I'll ask 5 questions one at a time."`
-- Module: `"Ready to quiz you on **<Module Title>**! I'll ask 5 questions drawn from across the module."`
-- Course: `"Ready to quiz you on the **<Track Title>** course! I'll ask 5 questions drawn from across all modules."`
+- Note: `"Ready to quiz you on **<Title>**! I'll ask <question-count> questions one at a time."`
+- Module: `"Ready to quiz you on **<Module Title>**! I'll ask <question-count> questions drawn from across the module."`
+- Course: `"Ready to quiz you on the **<Track Title>** course! I'll ask <question-count> questions drawn from across all modules."`
 
 Ask **one question at a time**, using the chosen format:
 
@@ -134,7 +148,7 @@ Continue until all questions are complete, or the user asks to stop.
 
 After the final question, give a brief summary: score and any concepts, notes, or modules worth revisiting.
 
-### 8. Save quiz results
+### 9. Save quiz results
 
 Run `date '+%Y-%m-%dT%H-%M-%S'` in the shell to get the current timestamp. Do not substitute zeros or approximate the time.
 
