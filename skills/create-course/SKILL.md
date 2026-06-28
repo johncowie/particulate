@@ -1,9 +1,9 @@
 ---
 name: create-course
 description: Create a new learning course in the Obsidian vault, including the full module structure and note outlines. Use when starting a new broad subject area (e.g. aws, machine-learning, physics).
-argument-hint: <course-name> [Course Title]
+argument-hint: <course-name> [Course Title or description]
 arguments: [course_name, course_title]
-allow-tools: Read Write Edit Bash
+allow-tools: Read Write Edit Bash WebSearch WebFetch
 ---
 
 # Create Learning Course
@@ -16,19 +16,31 @@ Create a new learning course for "$course_name" in the Obsidian vault.
 
 Look for a directory containing a `README.md` with `type: index` in its frontmatter — that is the vault root. Search the current directory first, then one level of subdirectories. If not found, ask the user to specify the vault root path.
 
-### 2. Validate the course name
+### 2. Interpret the user's input
+
+The user may have provided either:
+- A short course slug (e.g. `machine-learning`) with an optional display title or no extra argument
+- A longer description of the course they want to create (e.g. "I want to learn about how neural networks work and how to train them")
+
+If "$course_title" is long or sentence-like (i.e. appears to be a description rather than a title), treat the combined input as a course proposal: propose a suitable short display title and confirm it with the user before proceeding. If "$course_name" itself is descriptive rather than a valid slug, derive an appropriate slug from the proposed title.
+
+### 3. Validate the course name
 
 The course name "$course_name" should be lowercase and hyphen-separated (e.g. `machine-learning`, `aws`, `physics`). If it isn't, convert it automatically and confirm with the user.
 
-### 3. Check for duplicates
+### 4. Check for duplicates
 
 If `<vault-root>/$course_name/` already exists, tell the user and stop — don't overwrite it.
 
-### 4. Determine the display title
+### 5. Determine the display title
 
-If "$course_title" was provided, use it. Otherwise derive a title from "$course_name" by converting hyphens to spaces and title-casing each word (e.g. `machine-learning` → `Machine Learning`).
+If a display title was confirmed in step 2, use it. Otherwise, if "$course_title" was provided as a short title, use it. Otherwise derive a title from "$course_name" by converting hyphens to spaces and title-casing each word (e.g. `machine-learning` → `Machine Learning`).
 
-### 5. Plan the course structure with the user
+### 5a. Research unfamiliar topics
+
+If you are not confident you have sufficient knowledge to propose a well-structured course on this topic, use WebSearch and WebFetch to research it before proceeding. Look for authoritative learning resources, syllabi, curricula, or documentation that can inform the module and note structure. Gather enough context to propose a course that is accurate and well-ordered.
+
+### 6. Plan the course structure with the user
 
 Propose a set of modules for this course — ordered from foundational to advanced. For each module, propose an ordered list of notes (individual concepts) it will cover.
 
@@ -46,7 +58,7 @@ Present the proposed structure clearly, for example:
 
 Ask the user to confirm, adjust, or expand the structure before creating any files. This is the most important step — don't proceed until the structure is agreed.
 
-### 6. Create the course README
+### 7. Create the course README
 
 Create `<vault-root>/$course_name/README.md`:
 
@@ -66,7 +78,7 @@ tags: [$course_name]
 ...
 ```
 
-### 7. Create each module directory and README
+### 8. Create each module directory and README
 
 For each module, create `<vault-root>/$course_name/<NN>-<module-name>/README.md` where `NN` is a zero-padded two-digit number (01, 02, …).
 
@@ -95,7 +107,7 @@ Note filenames in the index: zero-padded two-digit number + Title Case with spac
 
 Do **not** create the individual note `.md` files — those are created later by `/add-note`.
 
-### 8. Update the vault index
+### 9. Update the vault index
 
 Read `<vault-root>/README.md`. Add a wikilink to the new course under the tracks/courses list:
 
@@ -103,6 +115,6 @@ Read `<vault-root>/README.md`. Add a wikilink to the new course under the tracks
 - [[$course_name/README|<derived title>]] — <one-line description>
 ```
 
-### 9. Confirm completion
+### 10. Confirm completion
 
 Tell the user what was created: the course directory, how many modules, and the total number of notes planned. Remind them they can run `/add-note` to start filling in the first note.
