@@ -3,7 +3,7 @@ name: add-note
 description: Add a new concept note to a module in the Obsidian learning vault. Writes the note, teaches the material in conversation, answers questions, then quizzes the user. Use when learning a specific concept within an existing course.
 argument-hint: "<note topic> [track/module]"
 arguments: [note_topic, track_module]
-allow-tools: Read Write Edit Bash
+allow-tools: Read Write Edit Bash WebSearch WebFetch
 ---
 
 # Add Note
@@ -46,7 +46,16 @@ Read the module `README.md` to:
 - **Filename**: `<NN> <Title Case Title>.md` where `NN` is the next number in the module sequence (e.g. `03 Gradient Descent.md`).
 - The file lives at `<vault-root>/<track>/<module-folder>/<filename>`.
 
-### 5. Write the note
+### 5. Research the topic
+
+Before writing, assess your confidence in the material:
+
+- If there is **any uncertainty** about the accuracy of the content (e.g. niche topic, evolving field, specific API behaviour, version-dependent details), use WebSearch and WebFetch to verify and fill gaps.
+- If the topic is **potentially out of date** (e.g. cloud services, frameworks, language features, tooling), search for the current state regardless of confidence.
+
+Gather information from authoritative sources (official docs, reputable tutorials, academic references). Collect the URLs of any sources that meaningfully inform the note — they will be listed in the References section.
+
+### 6. Write the note
 
 Create the note file with this structure (fill in all sections with real content — do not leave placeholders):
 
@@ -87,6 +96,8 @@ tags: [<track>, <module-name-without-number>, <concept-tags>]
 ## References
 
 - [<Source Title>](<url>) — <one-line description>
+
+<!-- Include any web sources consulted during research. Omit this section only if no external sources were used. -->
 ```
 
 **Wikilink rules:**
@@ -94,7 +105,7 @@ tags: [<track>, <module-name-without-number>, <concept-tags>]
 - Use `[[NN Note Name|Note Name]]` for numbered notes (alias hides the number).
 - Link any mentioned concept that has (or should have) its own note.
 
-### 6. Update the module README
+### 7. Update the module README
 
 **If the note already has an unchecked entry** (`- [ ] [[NN <Title>|<Title>]]`) in the module README — i.e. it was planned by `/create-course` — tick the checkbox:
 
@@ -137,27 +148,27 @@ Also update the track README to include the new module if it was just created.
 - [x] [[NN-<module-name>/README|<Module Title>]]
 ```
 
-### 7. Teach the material
+### 8. Teach the material
 
 Summarise the note content in conversation in a clear, engaging way — as if explaining the concept to the user for the first time. Keep it concise but complete.
 
 Then ask: "Do you have any questions?"
 
-### 8. Answer questions
+### 9. Answer questions
 
 Answer each question thoroughly. After each answer, ask: "Anything else, or shall we move on?"
 
 Continue until the user signals they are done.
 
-### 9. Refine the note
+### 10. Refine the note
 
 After the conversation ends, if anything was discussed that would make the note clearer, more accurate, or more complete — update the note file. Also check for bidirectional linking opportunities: if the new note links to an existing note B, consider whether note B should link back to the new note.
 
-### 10. Quiz the user
+### 11. Quiz the user
 
 Offer a quiz on the note, then run it using the `/quiz` skill with `note` and the note title as arguments. If the user declines, skip to the next step.
 
-### 11. Commit prompt
+### 12. Commit prompt
 
 After the quiz (or if the user skips it), ask: "Want me to commit and push these notes?"
 
