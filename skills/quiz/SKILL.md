@@ -61,17 +61,21 @@ Search the vault for a note file matching the scope:
 
 Read the resolved note file and extract:
 - The **title** (from `title:` frontmatter or the first `# Heading`).
-- All questions from the **Check Your Understanding** section. If this section is missing, offer to generate ad-hoc questions from the note content instead.
+- All questions from the **Check Your Understanding** section (if present).
+
+Then generate additional ad-hoc questions from the note body to supplement the pre-written ones. Aim for a roughly even blend — for every pre-written question, generate roughly one ad-hoc question. Ad-hoc questions should cover angles not already addressed by the pre-written ones (e.g. applied scenarios, edge cases, or connections to related concepts).
+
+If the **Check Your Understanding** section is missing entirely, generate all questions ad-hoc from the note content.
 
 #### Module quiz
 Locate the matching module directory (partial, case-insensitive match on the folder name). If no match is found, list available modules and ask the user to pick one.
 
-Read the module `README.md` to get the list of notes, then read each note file. From each note, extract the title and all **Check Your Understanding** questions, tagged with the note they came from.
+Read the module `README.md` to get the list of notes, then read each note file. From each note, extract the title and all **Check Your Understanding** questions, then generate ad-hoc questions to supplement them (same blending approach as above), tagging all questions with the note they came from.
 
 #### Course quiz
 Locate the matching top-level track directory (partial, case-insensitive). If no match is found, list available tracks and ask the user to pick one.
 
-Read the track `README.md` to get the list of modules. For each module, read its `README.md` to get notes. Read each note file and extract the title, module, and all **Check Your Understanding** questions, tagged with note and module.
+Read the track `README.md` to get the list of modules. For each module, read its `README.md` to get notes. Read each note file and extract the title, module, and all **Check Your Understanding** questions, then generate ad-hoc questions to supplement them, tagging all questions with note and module.
 
 For module and course quizzes: if the total question pool is smaller than `<question-count>`, use all available and note the smaller count in the quiz announcement.
 
