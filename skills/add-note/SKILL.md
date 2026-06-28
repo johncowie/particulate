@@ -57,6 +57,8 @@ Gather information from authoritative sources (official docs, reputable tutorial
 
 ### 6. Write the note
 
+**Acronym/initialism rule:** The first time any acronym or initialism appears in the note, write it out in full followed by the acronym in brackets — e.g. "Secure Shell (SSH)". After that first use, the acronym alone is fine throughout the rest of the note.
+
 Create the note file with this structure (fill in all sections with real content — do not leave placeholders):
 
 ```markdown
@@ -151,6 +153,8 @@ Also update the track README to include the new module if it was just created.
 ### 8. Teach the material
 
 Summarise the note content in conversation in a clear, engaging way — as if explaining the concept to the user for the first time. Keep it concise but complete.
+
+**Acronym/initialism rule:** The first time any acronym or initialism appears in the lesson text, write it out in full followed by the acronym in brackets — e.g. "Secure Shell (SSH)". After that first use, the acronym alone is fine for the rest of the lesson.
 
 Then ask: "Do you have any questions?"
 
