@@ -3,7 +3,12 @@ name: quiz
 description: Quiz the user on material from the Obsidian learning vault — at the level of a single note, a whole module, or an entire course. Draws from Check Your Understanding sections, adapts to past results to focus on weak areas. Use when the user wants to test their knowledge on anything they've studied.
 argument-hint: "[note|module|course] [scope]"
 arguments: [granularity, scope]
-allow-tools: Read Write Bash AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - AskUserQuestion
+  - Bash(${CLAUDE_PLUGIN_ROOT}/scripts/shuffle-order.sh *)
+  - Bash(date *)
 ---
 
 # Quiz
@@ -88,7 +93,18 @@ Use this history to:
 
 Briefly note to the user if you're adapting based on past results (e.g. "You've struggled with **X** before, so I'll lean into that.").
 
-### 6. Run the quiz
+### 6. Choose quiz format
+
+Use `AskUserQuestion` to ask the user how they'd like to be quizzed:
+
+> "How would you like to be quizzed?"
+> Options:
+> - **Multiple choice** — I'll give you four options to pick from for each question
+> - **Free recall** — You type your answer in your own words
+
+Record the chosen format; it governs how questions are presented in the next step.
+
+### 7. Run the quiz
 
 Select 5 questions (or fewer if the pool is smaller). For module and course quizzes, spread across notes/modules where possible.
 
@@ -97,18 +113,28 @@ Announce the quiz:
 - Module: `"Ready to quiz you on **<Module Title>**! I'll ask 5 questions drawn from across the module."`
 - Course: `"Ready to quiz you on the **<Track Title>** course! I'll ask 5 questions drawn from across all modules."`
 
-Ask **one question at a time**:
-1. Present the question.
-2. Wait for the user's answer.
-3. Give clear feedback — whether correct or not, and why. Reference the note content.
-4. Record internally whether the answer was correct, plus which note and module it came from (for module/course quizzes).
-5. Move on to the next question.
+Ask **one question at a time**, using the chosen format:
+
+**If multiple choice:**
+- Before presenting the question, generate four answer options: one correct answer and three plausible distractors drawn from the note content. Hold these in order as slots 1, 2, 3, 4 — **do not reveal this ordering to the user**.
+- Run `${CLAUDE_PLUGIN_ROOT}/scripts/shuffle-order.sh 4` to get a shuffled index sequence (e.g. `3 1 4 2`). Rearrange your four options into that order. Note internally which position the correct answer (slot 1) now occupies — never pass any option text to the shell.
+- Use `AskUserQuestion` to present the question and the four shuffled options.
+- After the user selects an option, give feedback — whether it's correct and why. Reference the note content.
+
+**If free recall:**
+- Present the question in prose.
+- Wait for the user to type their answer.
+- Give clear feedback — whether correct or not, and why. Reference the note content.
+
+For both formats:
+- Record internally whether the answer was correct, plus which note and module it came from (for module/course quizzes).
+- Move on to the next question.
 
 Continue until all questions are complete, or the user asks to stop.
 
 After the final question, give a brief summary: score and any concepts, notes, or modules worth revisiting.
 
-### 7. Save quiz results
+### 8. Save quiz results
 
 Run `date '+%Y-%m-%dT%H-%M-%S'` in the shell to get the current timestamp. Do not substitute zeros or approximate the time.
 
@@ -131,6 +157,7 @@ quiz-type: <note|module|course>
 scope: <note title | module name | track name>
 track: <track name>          # module and course quizzes only
 date: <ISO-8601 timestamp>
+format: <multiple-choice|free-recall>
 score: <n>/<total>
 ---
 
