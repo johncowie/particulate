@@ -55,7 +55,28 @@ Before writing, assess your confidence in the material:
 
 Gather information from authoritative sources (official docs, reputable tutorials, academic references). Collect the URLs of any sources that meaningfully inform the note — they will be listed in the References section.
 
+**Image search (optional but encouraged):** After gathering textual sources, search for 1–2 diagrams or illustrations that genuinely aid understanding of the concept — architecture diagrams, flow diagrams, concept maps, official documentation screenshots. Only use images that are clearly freely licensed (Creative Commons, public domain) or sourced from official documentation. Skip anything where licensing is unclear.
+
+To include an image:
+1. Create the assets directory if it doesn't exist: `<vault-root>/_assets/<track>/`
+2. Download the image using `curl -L -o <vault-root>/_assets/<track>/<descriptive-name>.<ext> "<url>"`
+3. Reference it in the note with a relative path: `![<alt text>](../../_assets/<track>/<filename>)`
+4. Add the image source to the References section.
+
+If no suitable freely licensed image exists, skip this step — a good Mermaid diagram you write yourself is always preferable to a poorly licensed or irrelevant image.
+
 ### 6. Write the note
+
+**Acronym/initialism rule:** The first time any acronym or initialism appears in the note, write it out in full followed by the acronym in brackets — e.g. "Secure Shell (SSH)". After that first use, the acronym alone is fine throughout the rest of the note.
+
+**Visual content guidance:** Notes should be engaging and visually rich where it helps understanding. Actively look for opportunities to include:
+
+- **Mermaid diagrams** — use for flows, pipelines, architectures, state machines, sequences, hierarchies, or any concept with structure or relationships. Obsidian renders these natively. Choose the right diagram type: `flowchart` for processes, `sequenceDiagram` for interactions, `classDiagram` for structure, `stateDiagram` for state machines, `graph` for networks.
+- **Code examples** — include for any programming, configuration, CLI, or API concept. Use realistic, runnable snippets rather than pseudocode. Label the language on every code fence (` ```python `, ` ```yaml `, etc.).
+- **Tables** — use for comparing options, listing properties, mapping concepts, or summarising multiple related items side by side.
+- **Obsidian callouts** — use to highlight key warnings, tips, or "gotcha" moments: `> [!warning]`, `> [!tip]`, `> [!info]`, `> [!important]`.
+
+The goal is that a reader opening the note gets the concept faster than from prose alone. Don't add visuals for decoration — add them when they genuinely clarify.
 
 Create the note file with this structure (fill in all sections with real content — do not leave placeholders):
 
@@ -71,7 +92,7 @@ tags: [<track>, <module-name-without-number>, <concept-tags>]
 
 <One-sentence definition or summary.>
 
-<Full explanation — as much depth as needed. Use headers, lists, tables, code blocks as appropriate. Link liberally to related concepts using wikilinks: [[Note Name]] or [[NN Note Name|Note Name]] for numbered notes.>
+<Full explanation — as much depth as needed. Use headers, lists, tables, code blocks, Mermaid diagrams, and callouts as appropriate. Link liberally to related concepts using wikilinks: [[Note Name]] or [[NN Note Name|Note Name]] for numbered notes.>
 
 ## Key Points
 
@@ -83,7 +104,7 @@ tags: [<track>, <module-name-without-number>, <concept-tags>]
 
 ## Examples
 
-<Concrete examples or analogies that make the concept tangible. Omit this section only if there are genuinely no useful examples.>
+<Concrete examples or analogies that make the concept tangible. Include code snippets or diagrams here where they aid understanding. Omit this section only if there are genuinely no useful examples.>
 
 ## Check Your Understanding
 
@@ -152,6 +173,8 @@ Also update the track README to include the new module if it was just created.
 
 Summarise the note content in conversation in a clear, engaging way — as if explaining the concept to the user for the first time. Keep it concise but complete.
 
+**Acronym/initialism rule:** The first time any acronym or initialism appears in the lesson text, write it out in full followed by the acronym in brackets — e.g. "Secure Shell (SSH)". After that first use, the acronym alone is fine for the rest of the lesson.
+
 Then ask: "Do you have any questions?"
 
 ### 9. Answer questions
@@ -168,12 +191,3 @@ After the conversation ends, if anything was discussed that would make the note 
 
 Offer a quiz on the note, then run it using the `/quiz` skill with `note` and the note title as arguments. If the user declines, skip to the next step.
 
-### 12. Commit prompt
-
-After the quiz (or if the user skips it), ask: "Want me to commit and push these notes?"
-
-If yes, stage and commit only the new/modified vault files with a message like:
-
-```
-notes: add <Title> to <track>/<module>
-```
