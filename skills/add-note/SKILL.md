@@ -191,12 +191,3 @@ After the conversation ends, if anything was discussed that would make the note 
 
 Offer a quiz on the note, then run it using the `/quiz` skill with `note` and the note title as arguments. If the user declines, skip to the next step.
 
-### 12. Commit prompt
-
-After the quiz (or if the user skips it), ask: "Want me to commit and push these notes?"
-
-If yes, stage and commit only the new/modified vault files with a message like:
-
-```
-notes: add <Title> to <track>/<module>
-```
