@@ -8,6 +8,7 @@ A Claude Code plugin providing skills for managing a structured Obsidian learnin
 |---|---|
 | `/create-course` | Create a new learning course (top-level subject area) |
 | `/add-note` | Add a concept note to a module, teach it, and quiz the user |
+| `/quiz` | Quiz the user on a note, module, or entire course |
 
 ## Vault Structure
 
