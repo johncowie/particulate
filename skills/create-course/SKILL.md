@@ -44,6 +44,8 @@ If you are not confident you have sufficient knowledge to propose a well-structu
 
 Propose a set of modules for this course — ordered from foundational to advanced. For each module, propose an ordered list of notes (individual concepts) it will cover.
 
+As you plan, consider which notes will benefit from visual aids — for example: architecture or flow concepts suit Mermaid diagrams; CLI or API concepts suit code examples; comparison-heavy concepts suit tables. You don't need to list this in the proposal, but keep it in mind so the structure reflects where visual content will be most useful.
+
 Present the proposed structure clearly, for example:
 
 ```
