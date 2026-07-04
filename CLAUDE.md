@@ -59,6 +59,11 @@ Uses [mise](https://mise.jdx.dev/) for tooling (Python, shellcheck, shfmt).
 Shell scripts are formatted with `shfmt -i 2` (2-space indent) and must pass
 `shellcheck`.
 
+## Git workflow
+
+When asked to commit and push, target the `develop` branch by default.
+Only commit/push to `main` or another branch if the user explicitly says so.
+
 ## Editing skills
 
 When modifying a `SKILL.md`:
